@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter">
+        <item>Region</item>
+        <item>Genero</item>
+        <item>Destino</item>
+        <item>Origen</item>
+        <item>Cantidad Maxima</item>
+        <item>Cantidad Minima</item>
+        <item>Mes Estimado</item>
+    </string-array>
+
+    <string-array name="regiones">
+        <item>Quebrada</item>
+        <item>Puna</item>
+        <item>Yungas</item>
+        <item>Valles</item>
+    </string-array>
+
+    <string-array name="generos">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Lgbtq</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string-array name="sitios">
+        <item>Serranía de Hornocal</item>
+        <item>Inca Cueva</item>
+        <item>Garganta del diablo</item>
+        <item>Cerro El Huancar de Abra Pampa</item>
+    </string-array>
+
+    <string-array name="departamento">
+        <item>Cochinoca</item>
+        <item>Tilcara</item>
+        <item>Humahuaca</item>
+        <item>Purmamarca</item>
+    </string-array>
+
+    <string-array name="origen">
+        <item>San Salvador de Jujuy</item>
+        <item>Palpala</item>
+        <item>Perico</item>
+        <item>El Carmen</item>
+        <item>San Pedro</item>
+        <item>Ledesma</item>
+    </string-array>
+
+    <string-array name="estado">
+        <item>Activo</item>
+        <item>Finalizado</item>
+    </string-array>
+
+    <string-array name="numeros">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="mes">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Septiembre</item>
+        <item>Octubre</item>
+        <item>Novienbre</item>
+        <item>Diciembre</item>
+    </string-array>
+    
+</resources>

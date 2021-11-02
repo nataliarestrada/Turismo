@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "311766125556",
+    "firebase_url": "https://all-travel-jujuy-default-rtdb.firebaseio.com",
+    "project_id": "all-travel-jujuy",
+    "storage_bucket": "all-travel-jujuy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311766125556:android:64eeab25fd98fa1d4547a1",
+        "android_client_info": {
+          "package_name": "com.example.turismo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311766125556-ciaq44g5v2rt81s0vqvorumrvmdtdrlk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj-Dtme-__IXbtKj2HICoFZ5AS6Jr6TG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "311766125556-ciaq44g5v2rt81s0vqvorumrvmdtdrlk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
