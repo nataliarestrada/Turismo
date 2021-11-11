@@ -10,12 +10,29 @@ import android.view.ViewGroup;
 
 import com.example.turismo.R;
 
+public class PerfilFragment extends Fragment {
+
+    private String idusuario;
+
+    public PerfilFragment(String idusuario) {
+        this.idusuario=idusuario;
+        // Required empty public constructor
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_perfil, container, false);
+    }
+}
+
 /*/**
  * A simple {@link Fragment} subclass.
  * Use the {@link PerfilFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PerfilFragment extends Fragment {
 
 /*    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,13 +42,7 @@ public class PerfilFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;*/
-    private String idusuario;
 
-    public PerfilFragment(String idusuario) {
-        this.idusuario=idusuario;
-        // Required empty public constructor
-
-    }
     /*
         /**
          * Use this factory method to create a new instance of
@@ -59,11 +70,3 @@ public class PerfilFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }*/
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
-    }
-}

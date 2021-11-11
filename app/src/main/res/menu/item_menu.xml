@@ -9,7 +9,7 @@
     <item
         android:id="@+id/nav_sitios"
         android:icon="@drawable/ic_info"
-        android:title="Sitios" />
+        android:title="Destinos" />
 
     <item
         android:id="@+id/nav_grupo"

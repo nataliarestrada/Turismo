@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         String iduser = user.getUid();
 
 
-                        Toast.makeText(getApplicationContext(), "Bienvenid@ a All Travel Jujuy", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Bienvenid@ a All Travel Jujuy", Toast.LENGTH_LONG).show();
                         //limpiarCampos();
                         // if the user created intent to login activity
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

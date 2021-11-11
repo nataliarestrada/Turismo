@@ -3,6 +3,7 @@ package com.example.turismo.fragmentos.grupos;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,57 +22,23 @@ import com.example.turismo.InfoGrupoActivity;
 import com.example.turismo.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/*/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GruposFragment#newInstance} factory method to
- * create an instance of this fragment.*/
+
 public class GruposFragment extends Fragment {
 
-/*    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;*/
-
-    private String idusuario;
+    String idusuario;
 
     public GruposFragment(String idusuario) {
         this.idusuario=idusuario;
         // Required empty public constructor
     }
-
-/*    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GruposFragment.
-     */
-/*    // TODO: Rename and change types and number of parameters
-   public static GruposFragment newInstance(String param1, String param2) {
-        GruposFragment fragment = new GruposFragment(param1);
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
 
     Spinner filter, filter1;
     View vista;
@@ -79,6 +46,9 @@ public class GruposFragment extends Fragment {
     RecyclerView recyclerGrupo;
     GrupoAdapter grupoAdapter;
     ArrayList<Grupo> listagrupo;
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     ExtendedFloatingActionButton bflotante;
 
@@ -94,6 +64,8 @@ public class GruposFragment extends Fragment {
         //Cargar SPINNER PARA Los filtros.
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(), R.array.filter, android.R.layout.simple_spinner_item );
         filter.setAdapter(arrayAdapter);
+
+
 
         //cargar segundo spinner
         filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -158,6 +130,7 @@ public class GruposFragment extends Fragment {
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(getContext(), CrearGrupoActivity.class);
+                i.putExtra("iduser",idusuario);
                 startActivity(i);
             }
         });
@@ -167,7 +140,73 @@ public class GruposFragment extends Fragment {
 
 
     private void llenarLista() {
-        listagrupo.add(new Grupo(1,"Garganta del diablo", "Quebrada", "Mixto",
+
+        databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listagrupo.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    Grupo g = objSnapshot.getValue(Grupo.class);
+                    g.setId(Integer.parseInt(objSnapshot.getKey()));
+//                    g.setDescripcion(objSnapshot.child("descripcion").getValue().toString());
+//                    g.setSitio(objSnapshot.child("sitio").getValue().toString());
+//                    g.setRegion(objSnapshot.child("region").getValue().toString());
+                    grupoAdapter.agregarGrupo(g);
+                    //System.out.println(objSnapshot);
+                    //listagrupo.add(g);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+}
+
+/*/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link GruposFragment#newInstance} factory method to
+ * create an instance of this fragment.*/
+
+/*    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;*/
+
+/*    /**
+ * Use this factory method to create a new instance of
+ * this fragment using the provided parameters.
+ *
+ * @param param1 Parameter 1.
+ * @param param2 Parameter 2.
+ * @return A new instance of fragment GruposFragment.
+ */
+/*    // TODO: Rename and change types and number of parameters
+   public static GruposFragment newInstance(String param1, String param2) {
+        GruposFragment fragment = new GruposFragment(param1);
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }*/
+
+/*        listagrupo.add(new Grupo(1,"Garganta del diablo", "Quebrada", "Mixto",
                 "Diciembre", "San Salvador de jujuy", 3, 5, 2,
                 "No viajamos para ir a un lugar en particular, sino por ir. Viajamos por el placer de viajar. La cuestión es movernos."
                 ,"activo"));
@@ -182,6 +221,4 @@ public class GruposFragment extends Fragment {
 
         listagrupo.add(new Grupo(4,"Serranía de Hornocal ", "Quebrada", "Femenino",
                 "Febrero", "Perico", 3, 6, 1,
-                "descripcion 4","activo"));
-    }
-}
+                "descripcion 4","activo"));*/

@@ -29,6 +29,9 @@ public class Grupo {
         this.estado = estado;
     }
 
+    public Grupo() {
+    }
+
     public Grupo(int id) {
         this.id = id;
     }

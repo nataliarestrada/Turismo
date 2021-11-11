@@ -29,6 +29,12 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
         this.context = context;
     }
 
+    public void agregarGrupo(Grupo grupo){
+        grupoList.add(grupo);
+        this.notifyDataSetChanged();
+
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -99,11 +105,11 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
             }
         });
 
-        if (posmarcada==position){
+/*        if (posmarcada==position){
             holder.descripcion.setText("holaaa");
         } else {
             holder.descripcion.setText("hola 1");
-        }
+        }*/
 
     }
 
