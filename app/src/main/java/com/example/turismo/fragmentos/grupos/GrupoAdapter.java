@@ -21,12 +21,18 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
 
     private ArrayList<Grupo> grupoList;
     private Context context;
+    private String idusuario;
 
     int posmarcada=0;
 
     public GrupoAdapter(ArrayList<Grupo> grupoList, Context context) {
         this.grupoList = grupoList;
         this.context = context;
+        this.idusuario=idusuario;
+    }
+
+    public void traeridusuario(String idusuario){
+        this.idusuario=idusuario;
     }
 
     public void agregarGrupo(Grupo grupo){
@@ -99,6 +105,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
                 Intent i;
                 i = new Intent(context, InfoGrupoActivity.class);
                 i.putExtra("idgrupo",holder.id.getText());
+                i.putExtra("idusuario", idusuario);
                 context.startActivity(i);
 
                 notifyDataSetChanged();

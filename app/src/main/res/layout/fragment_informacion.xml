@@ -65,7 +65,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="8dp">
 
@@ -92,7 +91,7 @@
                                 android:background="@android:color/transparent"
                                 android:text="Descripción: Ubicada a 25 kilómetros de la ciudad de Humahuaca, esta serranía es una formación única, por su dimensión y cantidad decolores, los cuales varían entre blanco, ocre, amarillo, rojo, entre otros. Esta serranía puede apreciarse por completo desde el mirador ubicado al frente, a una altura de 4.344 metros sobre el nivel del mar."
                                 android:textColor="#857A7A"
-                                android:textSize="16dp"
+                                android:textSize="17dp"
                                 android:textStyle="italic"/>
 
                             <TextView
@@ -113,11 +112,47 @@
                                 android:textColor="#857A7A"
                                 android:textSize="15dp" />
 
-                            <ImageView
-                                android:id="@+id/imagenView_hacer"
+                            <HorizontalScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="212dp"
-                                app:srcCompat="@drawable/quebrada" />
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/serrania1" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/serrania2" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/serrania3" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/serrania4" />
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -127,7 +162,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="8dp">
 
@@ -154,7 +188,7 @@
                                 android:background="@android:color/transparent"
                                 android:text="Descripción: Es un yacimiento conocido como Chulín es el más valioso exponente de arte rupestre de la región. Emplazada en el sector norte de la Quebrada de Humahuaca, la Quebrada de Inca Cueva cuenta con una superficie total de 226,5 km2, ubicándose en el borde oriental de la Puna argentina. Ésta se ubica a 48 kilómetros de Humahuaca, en Jujuy."
                                 android:textColor="#857A7A"
-                                android:textSize="16dp"
+                                android:textSize="17dp"
                                 android:textStyle="italic"/>
 
                             <TextView
@@ -163,7 +197,7 @@
                                 android:background="@android:color/transparent"
                                 android:text="Lo actualmente visible es una gruta de alrededor de cuarenta metros de largo, cinco de profundidad y alrededor de diez metros de alto, con la casi totalidad de sus paredes y techos cubiertos de pictografías en los colores blanco, rojo y negro, formando figuras geométricas y animales diversos, entre los que predominan las llamas."
                                 android:textColor="#857A7A"
-                                android:textSize="16dp"
+                                android:textSize="17dp"
                                 android:textStyle="italic"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -180,11 +214,48 @@
                                 android:textColor="#857A7A"
                                 android:textSize="15dp" />
 
-                            <ImageView
-                                android:id="@+id/imagenView_gastronomia"
+                            <HorizontalScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="212dp"
-                                app:srcCompat="@drawable/yungas" />
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/inca1"
+                                        />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/inca2" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/inca3" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/inca4" />
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -194,7 +265,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="8dp">
 
@@ -220,7 +290,7 @@
                                 android:background="@android:color/transparent"
                                 android:text="Descripción: La Garganta del Diablo es uno de los tesoros mejor guardados de Tilcara. Un antiguo sendero tilcareño nos lleva hacia allí. Las imponentes paredes de roca que se elevan hacia el cielo encauzando el Río Huasamayo, las huellas del viento muestran un pasado tempestivo y la hermosa cascada que se muestra al final del camino. Se encuentra ubicada a 5 km desde el centro del pueblo de Tilcara a través de un camino en el que se aprecian unas increíbles vistas de altura y las antiguas pircas del Cerro Negro. Hay también un bello camino de herradura. Para aquellos que prefieran ir en vehículo el camino en este caso son unos 8 km de distancia de Tilcara. Bajando hacia la izquierda nos encontramos con el lecho del Río Huasamayo. Caminando por el río, encontramos a casi medio kilometro el fin del camino la cascada de unos 18 metros de altura. "
                                 android:textColor="#857A7A"
-                                android:textSize="16dp"
+                                android:textSize="17dp"
                                 android:textStyle="italic"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -237,11 +307,47 @@
                                 android:textColor="#857A7A"
                                 android:textSize="15dp" />
 
-                            <ImageView
-                                android:id="@+id/imagenView_gastronmia"
+                            <HorizontalScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="212dp"
-                                app:srcCompat="@drawable/valles" />
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/garganta1" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/garganta2" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/garganta3" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/garganta4" />
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -251,7 +357,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="8dp">
 
@@ -277,7 +382,7 @@
                                 android:background="@android:color/transparent"
                                 android:text="Descripción: Se trata de un médano gigante, acompañado de cerros con escasa vegetación y poblado de llamas. Al pie del cerro existe una laguna, allí se puede hacer observación de aves, sacar fotos o simplemente disfrutar del paisaje. Cuenta con dunas de arenas muy finas ideal para realizar actividades como sandboard, esquí para arena o realizar trekking a una altura de más de 3.000 metros de altura sobre el nivel del mar."
                                 android:textColor="#857A7A"
-                                android:textSize="16dp"
+                                android:textSize="17dp"
                                 android:textStyle="italic"/>
                             <TextView
                                 android:layout_width="match_parent"
@@ -294,11 +399,47 @@
                                 android:textColor="#857A7A"
                                 android:textSize="15dp" />
 
-                            <ImageView
-                                android:id="@+id/imagenView_gastronia"
+                            <HorizontalScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="212dp"
-                                app:srcCompat="@drawable/puna" />
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/huancar1" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/huancar2" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/huancar3" />
+
+                                    <ImageButton
+                                        android:layout_width="300dp"
+                                        android:layout_height="200dp"
+                                        android:layout_weight="1"
+                                        android:layout_margin="5dp"
+                                        android:background="@drawable/huancar4" />
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>

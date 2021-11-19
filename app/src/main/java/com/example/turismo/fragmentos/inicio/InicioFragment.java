@@ -2,6 +2,7 @@ package com.example.turismo.fragmentos.inicio;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -10,9 +11,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.turismo.Integrantes;
 import com.example.turismo.R;
+import com.example.turismo.fragmentos.grupos.Grupo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class InicioFragment extends Fragment {
@@ -25,6 +31,9 @@ public class InicioFragment extends Fragment {
 
     View vista;
     TextView editText;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,7 +41,26 @@ public class InicioFragment extends Fragment {
         vista = inflater.inflate(R.layout.fragment_inicio, container, false);
         editText = (TextView) vista.findViewById(R.id.editText_user);
 
-        editText.setText(idusuario);
+        //inicializarFirebase();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        databaseReference.child("Usuario").child(idusuario).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getChildren();
+                Integrantes i = snapshot.getValue(Integrantes.class);
+
+                editText.setText("¡Bienvenid@ "+i.getAlias()+"!");
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
         return vista;

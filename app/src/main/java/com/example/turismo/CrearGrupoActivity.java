@@ -104,15 +104,9 @@ public class CrearGrupoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registrargrupo(Integer.parseInt(String.valueOf(maxid)),iduser);
-
                 finish();
-                //registrargrupo();
-
             }
         });
-
-
-
 
     }
 

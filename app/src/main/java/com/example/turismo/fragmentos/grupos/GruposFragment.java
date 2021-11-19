@@ -120,6 +120,7 @@ public class GruposFragment extends Fragment {
 
         grupoAdapter = new GrupoAdapter(listagrupo, getContext());
         recyclerGrupo.setAdapter(grupoAdapter);
+        grupoAdapter.traeridusuario(idusuario);
 
         //boton flotante
 
@@ -148,12 +149,9 @@ public class GruposFragment extends Fragment {
                 for (DataSnapshot objSnapshot : snapshot.getChildren()) {
                     Grupo g = objSnapshot.getValue(Grupo.class);
                     g.setId(Integer.parseInt(objSnapshot.getKey()));
-//                    g.setDescripcion(objSnapshot.child("descripcion").getValue().toString());
-//                    g.setSitio(objSnapshot.child("sitio").getValue().toString());
-//                    g.setRegion(objSnapshot.child("region").getValue().toString());
+
                     grupoAdapter.agregarGrupo(g);
-                    //System.out.println(objSnapshot);
-                    //listagrupo.add(g);
+
                 }
             }
 
