@@ -28,6 +28,11 @@ public class PerfilFragment extends Fragment {
     }
 }
 
+
+
+
+
+
 /*/**
  * A simple {@link Fragment} subclass.
  * Use the {@link PerfilFragment#newInstance} factory method to
