@@ -7,13 +7,13 @@ public class Usuario {
     private String alias;
     private String genero;
     private String origen;
-    private int edad;
-    private int telefono;
+    private String edad;
+    private String telefono;
     private String email;
     private String contrasenia;
 
 
-    public Usuario( String nombre, String alias, String genero, String origen, int edad, int telefono, String email, String contrasenia) {
+    public Usuario( String nombre, String alias, String genero, String origen, String edad, String telefono, String email, String contrasenia) {
         //this.id = id;
         //String id,
         this.nombre = nombre;
@@ -27,25 +27,8 @@ public class Usuario {
     }
 
     public Usuario() {
-        /*Usuario u = new Usuario();
-                            u.setNombre(nombre);
-                            u.setGenero(genero);
-                            u.setOrigen(origen);
-                            u.setEdad(Integer.parseInt(edad));
-                            u.setTelefono(Integer.parseInt(telefono));
-                            u.setEmail(email);
-                            u.setContrasenia(contrasenia);
-                            u.setConfcontrasenia(confcontrasenia);*/
 
     }
-
-    /*public String getId() {
-        return id;
-    }*/
-
-/*    public void setId(String id) {
-        this.id = id;
-    }*/
 
     public String getNombre() {
         return nombre;
@@ -79,19 +62,19 @@ public class Usuario {
         this.origen = origen;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

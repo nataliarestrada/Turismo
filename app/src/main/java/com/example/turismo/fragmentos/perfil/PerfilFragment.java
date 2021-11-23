@@ -1,30 +1,96 @@
 package com.example.turismo.fragmentos.perfil;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.turismo.Integrantes;
 import com.example.turismo.R;
+import com.example.turismo.Usuario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PerfilFragment extends Fragment {
 
     private String idusuario;
+    View vista;
+    ImageButton bt1, bt2, bt3;
+    ImageView imagen;
+    TextView alias,nombre,edad,genero,domicilio,email,telefono;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     public PerfilFragment(String idusuario) {
         this.idusuario=idusuario;
-        // Required empty public constructor
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        vista = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        bt1 = (ImageButton) vista.findViewById(R.id.imageButton1);
+        bt2 = (ImageButton) vista.findViewById(R.id.imageButton2);
+        bt3 = (ImageButton) vista.findViewById(R.id.imageButton3);
+        imagen= (ImageView) vista.findViewById(R.id.image);
+        alias = (TextView) vista.findViewById(R.id.tv_alias_usuario);
+        nombre = (TextView) vista.findViewById(R.id.tv_nombre_usuario);
+        edad = (TextView) vista.findViewById(R.id.tv_edad_usuario);
+        genero = (TextView) vista.findViewById(R.id.tv_genero_usuario);
+        domicilio = (TextView) vista.findViewById(R.id.tv_domicilio_usuario);
+        email = (TextView) vista.findViewById(R.id.tv_email_usuario);
+        telefono = (TextView) vista.findViewById(R.id.tv_telefono_usuario);
+
+        //inicializarFirebase();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        databaseReference.child("Usuario").child(idusuario).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getChildren();
+                Usuario u = snapshot.getValue(Usuario.class);
+                System.out.println(u.getGenero());
+
+                if (u.getGenero().equals("Masculino")){
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    imagen.setBackground(getResources().getDrawable(R.drawable.perfil2));
+                }else{
+                    System.out.println("BBBBBBBBBBBBBBBBBBBBB");
+                    imagen.setBackground(getResources().getDrawable(R.drawable.perfil2));
+                }
+                alias.setText(u.getAlias());
+                nombre.setText("Nombre: "+u.getNombre());
+                edad.setText("Edad: "+u.getEdad());
+                genero.setText("Genero: "+u.getGenero());
+                domicilio.setText("Domicilio: "+u.getOrigen());
+                email.setText("Email: "+u.getEmail());
+                telefono.setText("Telefono: "+u.getTelefono());
+
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return vista;
     }
 }
 
