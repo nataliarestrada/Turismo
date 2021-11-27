@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.turismo.CrearGrupoActivity;
-import com.example.turismo.InfoGrupoActivity;
 import com.example.turismo.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GruposFragment extends Fragment {
@@ -51,6 +50,7 @@ public class GruposFragment extends Fragment {
     DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     ExtendedFloatingActionButton bflotante;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,7 +116,7 @@ public class GruposFragment extends Fragment {
         recyclerGrupo = (RecyclerView) vista.findViewById(R.id.recycler_grupos);
         recyclerGrupo.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        llenarLista();
+        llenarLista(idusuario);
 
         grupoAdapter = new GrupoAdapter(listagrupo, getContext());
         recyclerGrupo.setAdapter(grupoAdapter);
@@ -140,7 +140,7 @@ public class GruposFragment extends Fragment {
     }
 
 
-    private void llenarLista() {
+    private void llenarLista(String idusuar) {
 
         databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
             @Override
@@ -150,17 +150,41 @@ public class GruposFragment extends Fragment {
                     Grupo g = objSnapshot.getValue(Grupo.class);
                     g.setId(Integer.parseInt(objSnapshot.getKey()));
 
-                    grupoAdapter.agregarGrupo(g);
-
+                    seencuentrausuario(String.valueOf(g.getId()), idusuar, g, g.getEstado()); //pregunto si pertenece
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
+
+    private void seencuentrausuario(String idgrupo, String iduser, Grupo grupo, String estado) {
+        databaseReference.child("Grupos").child(idgrupo).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                ArrayList<String> personas = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                    String pers = objSnapshot.getValue().toString();
+                    personas.add(pers);
+                }
+                //si no esta en el grupo que lo muestre
+                if (!personas.contains(iduser)&&estado.equals("Activo")){
+                    grupoAdapter.agregarGrupo(grupo);
+                    //System.out.println("Cargaaa grupooo "+ idgrupo);
+                }
+                //System.out.println("grupooo "+ idgrupo);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
 }
 
 /*/**

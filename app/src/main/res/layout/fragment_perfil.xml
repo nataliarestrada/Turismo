@@ -57,11 +57,14 @@
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_basico"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="10dp"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -80,109 +83,128 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Informacion Basica"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"
+                                android:textStyle="bold"/>
 
                             <ImageButton
-                                android:id="@+id/imageButton1"
+                                android:id="@+id/button_basica"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_weight="0"
-                                android:background="@drawable/ic_ocultar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_nombre_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Nombre"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton8"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_edad_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Edad"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton11"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_genero_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Genero"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton4"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_domicilio_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Domicilio"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton5"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
+                                android:background="@drawable/ic_mostrar"
+                                android:clickable="true" />
                         </LinearLayout>
                     </LinearLayout>
-
                 </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:id="@+id/layout_basica"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_nombre_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Nombre"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton8"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_edad_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Edad"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton11"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_genero_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Genero"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton4"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_domicilio_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Domicilio"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton5"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_contacto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="10dp"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -201,66 +223,84 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Informacion de Contacto"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"
+                                android:textStyle="bold"/>
 
                             <ImageButton
-                                android:id="@+id/imageButton2"
+                                android:id="@+id/button_contacto"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_weight="0"
-                                android:background="@drawable/ic_ocultar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_email_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Email"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton9"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_telefono_usuario"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Telefono"
-                                android:textSize="17dp" />
-
-                            <ImageButton
-                                android:id="@+id/imageButton10"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_weight="0"
-                                android:background="@drawable/ic_modificar" />
+                                android:clickable="true"
+                                android:background="@drawable/ic_mostrar" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:id="@+id/layout_contacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_email_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Email"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton9"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_telefono_usuario"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Telefono"
+                            android:textSize="17dp" />
+
+                        <ImageButton
+                            android:id="@+id/imageButton10"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0"
+                            android:background="@drawable/ic_modificar" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_grupos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp">
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="10dp"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -279,22 +319,35 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Mis Grupos"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"
+                                android:textStyle="bold"/>
 
                             <ImageButton
-                                android:id="@+id/imageButton3"
+                                android:id="@+id/button_grupos"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_weight="0"
-                                android:background="@drawable/ic_ocultar" />
+                                android:clickable="true"
+                                android:background="@drawable/ic_mostrar" />
                         </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" >
-                        </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/layout_grupos"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -320,7 +373,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Contraseña y Seguridad"
-                                android:textSize="20dp" />
+                                android:textSize="20dp"
+                                android:textStyle="bold"/>
 
                             <ImageButton
                                 android:id="@+id/imageButton"

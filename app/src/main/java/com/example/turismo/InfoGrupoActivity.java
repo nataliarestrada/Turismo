@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.turismo.fragmentos.grupos.Grupo;
 import com.example.turismo.fragmentos.grupos.GrupoAdapter;
+import com.example.turismo.fragmentos.grupos.GruposFragment;
+import com.example.turismo.fragmentos.inicio.InicioFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -105,6 +108,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //agregarintegrante
                 unirseGrupo(Integer.parseInt(String.valueOf(maxid)),idusuario,idgrupo);
+                // close this activity
                 finish();
             }
         });
@@ -125,10 +129,10 @@ public class InfoGrupoActivity extends AppCompatActivity {
                 origen.setText(g.getOrigen());
                 genero.setText(g.getGenero());
                 descripcion.setText(g.getDescripcion());
-                cantmax.setText(String.valueOf(g.getCant_max()));
-                cantmin.setText(String.valueOf(g.getCant_min()));
-                cantidad.setText(String.valueOf(g.getCantidad()));
-                estado.setText(g.getEstado());
+                cantmax.setText("Cantidad Maxima: "+ String.valueOf(g.getCant_max()));
+                cantmin.setText("Cantidad Minima: "+ String.valueOf(g.getCant_min()));
+                cantidad.setText("Cantidad: "+ String.valueOf(g.getCantidad()));
+                estado.setText("Estrado: "+ g.getEstado());
             }
 
             @Override

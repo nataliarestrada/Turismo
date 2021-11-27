@@ -191,39 +191,31 @@
                     android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/textView14"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Cantidad min: " />
+                        android:layout_weight="1"
+                        android:text="Cantidad min: " />-->
 
                     <TextView
                         android:id="@+id/textView_cant_min"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/textView16"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Cantidad max: " />
+                        android:layout_weight="1"
+                        android:text="Cantidad max: " />-->
 
                     <TextView
                         android:id="@+id/textView_cant_max"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -231,12 +223,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/textView18"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="4.5"
-                        android:text="Cantidad: " />
+                        android:layout_weight="1"
+                        android:text="Cantidad: " />-->
 
                     <TextView
                         android:id="@+id/textView_cantidad"
@@ -244,26 +236,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/textView20"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:text="Estado: " />
+                        android:layout_weight="1"
+                        android:text="Estado: " />-->
 
                     <TextView
                         android:id="@+id/textView_estado"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-
                 </LinearLayout>
 
                 <View

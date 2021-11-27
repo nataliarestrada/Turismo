@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         iduser = (String) getIntent().getExtras().getSerializable("idUsuario");
 
-        System.out.println("Holaaaaa "+iduser);
+        //System.out.println("Holaaaaa "+iduser);
 
 
         bottomNavigationView =(BottomNavigationView) findViewById(R.id.bottom_navigation);

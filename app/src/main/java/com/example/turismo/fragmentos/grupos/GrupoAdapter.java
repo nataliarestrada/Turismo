@@ -14,6 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.turismo.CrearGrupoActivity;
 import com.example.turismo.InfoGrupoActivity;
 import com.example.turismo.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,17 +28,18 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
     private Context context;
     private String idusuario;
 
-    int posmarcada=0;
+    //int posmarcada=0;
 
     public GrupoAdapter(ArrayList<Grupo> grupoList, Context context) {
         this.grupoList = grupoList;
         this.context = context;
-        this.idusuario=idusuario;
+        //this.idusuario=idusuario;
     }
 
     public void traeridusuario(String idusuario){
         this.idusuario=idusuario;
     }
+
 
     public void agregarGrupo(Grupo grupo){
         grupoList.add(grupo);
@@ -94,14 +100,14 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
         holder.descripcion.setText(grupoList.get(position).getDescripcion());
         holder.estado.setText(grupoList.get(position).getEstado());
 
-        final int pos = position;
+        //final int pos = position;
 
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //System.out.println("ingreso al card");
-                posmarcada=pos;
+                //posmarcada=pos;
                 Intent i;
                 i = new Intent(context, InfoGrupoActivity.class);
                 i.putExtra("idgrupo",holder.id.getText());

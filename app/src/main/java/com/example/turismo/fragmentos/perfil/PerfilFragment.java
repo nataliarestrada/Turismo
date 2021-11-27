@@ -4,13 +4,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.turismo.Integrantes;
@@ -22,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class PerfilFragment extends Fragment {
 
     private String idusuario;
@@ -29,6 +34,7 @@ public class PerfilFragment extends Fragment {
     ImageButton bt1, bt2, bt3;
     ImageView imagen;
     TextView alias,nombre,edad,genero,domicilio,email,telefono;
+    LinearLayout layout1, layout2, layout3;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -43,9 +49,12 @@ public class PerfilFragment extends Fragment {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-        bt1 = (ImageButton) vista.findViewById(R.id.imageButton1);
-        bt2 = (ImageButton) vista.findViewById(R.id.imageButton2);
-        bt3 = (ImageButton) vista.findViewById(R.id.imageButton3);
+        bt1 = (ImageButton) vista.findViewById(R.id.button_basica);
+        bt2 = (ImageButton) vista.findViewById(R.id.button_contacto);
+        bt3 = (ImageButton) vista.findViewById(R.id.button_grupos);
+        layout1 = (LinearLayout) vista.findViewById(R.id.layout_basica);
+        layout2 = (LinearLayout) vista.findViewById(R.id.layout_contacto);
+        layout3 = (LinearLayout) vista.findViewById(R.id.layout_grupos);
         imagen= (ImageView) vista.findViewById(R.id.image);
         alias = (TextView) vista.findViewById(R.id.tv_alias_usuario);
         nombre = (TextView) vista.findViewById(R.id.tv_nombre_usuario);
@@ -59,6 +68,8 @@ public class PerfilFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+
+        //cargo la info del usuario
         databaseReference.child("Usuario").child(idusuario).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,11 +78,10 @@ public class PerfilFragment extends Fragment {
                 System.out.println(u.getGenero());
 
                 if (u.getGenero().equals("Masculino")){
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
                     imagen.setBackground(getResources().getDrawable(R.drawable.perfil2));
                 }else{
-                    System.out.println("BBBBBBBBBBBBBBBBBBBBB");
-                    imagen.setBackground(getResources().getDrawable(R.drawable.perfil2));
+                    imagen.setBackground(getResources().getDrawable(R.drawable.perfil1));
                 }
                 alias.setText(u.getAlias());
                 nombre.setText("Nombre: "+u.getNombre());
@@ -80,13 +90,70 @@ public class PerfilFragment extends Fragment {
                 domicilio.setText("Domicilio: "+u.getOrigen());
                 email.setText("Email: "+u.getEmail());
                 telefono.setText("Telefono: "+u.getTelefono());
-
-
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
+        //mostrar y ocultar
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Objects.equals(layout1.getVisibility(), 0)){
+                    bt1.setBackground(getResources().getDrawable(R.drawable.ic_mostrar));
+                    layout1.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = layout1.getLayoutParams();
+                    params.height = 0;
+                    layout1.setLayoutParams(params);
+
+                }else {
+                    bt1.setBackground(getResources().getDrawable(R.drawable.ic_ocultar));
+                    layout1.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = layout1.getLayoutParams();
+                    params.height = 300;
+                    layout1.setLayoutParams(params);
+                }
+            }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Objects.equals(layout2.getVisibility(), 0)){
+                    bt2.setBackground(getResources().getDrawable(R.drawable.ic_mostrar));
+                    layout2.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = layout2.getLayoutParams();
+                    params.height = 0;
+                    layout2.setLayoutParams(params);
+
+                }else {
+                    bt2.setBackground(getResources().getDrawable(R.drawable.ic_ocultar));
+                    layout2.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = layout2.getLayoutParams();
+                    params.height = 200;
+                    layout2.setLayoutParams(params);
+                }
+            }
+        });
+
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Objects.equals(layout3.getVisibility(), 0)){
+                    bt3.setBackground(getResources().getDrawable(R.drawable.ic_mostrar));
+                    layout3.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = layout3.getLayoutParams();
+                    params.height = 0;
+                    layout3.setLayoutParams(params);
+
+                }else {
+                    bt3.setBackground(getResources().getDrawable(R.drawable.ic_ocultar));
+                    layout3.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = layout3.getLayoutParams();
+                    params.height = 400;
+                    layout3.setLayoutParams(params);
+                }
             }
         });
 
