@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +21,15 @@ import android.widget.TextView;
 import com.example.turismo.Integrantes;
 import com.example.turismo.R;
 import com.example.turismo.Usuario;
+import com.example.turismo.fragmentos.grupos.Grupo;
+import com.example.turismo.fragmentos.grupos.GrupoAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class PerfilFragment extends Fragment {
@@ -38,6 +43,10 @@ public class PerfilFragment extends Fragment {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+    RecyclerView recyclerGrupoPerfil;
+    GrupoPerfilAdapter grupoAdapterPerfil;
+    ArrayList<Grupo> listagrupoPerfil;
 
     public PerfilFragment(String idusuario) {
         this.idusuario=idusuario;
@@ -151,13 +160,68 @@ public class PerfilFragment extends Fragment {
                     bt3.setBackground(getResources().getDrawable(R.drawable.ic_ocultar));
                     layout3.setVisibility(View.VISIBLE);
                     ViewGroup.LayoutParams params = layout3.getLayoutParams();
-                    params.height = 400;
+                    params.height = 900;
                     layout3.setLayoutParams(params);
                 }
             }
         });
 
+
+        //Cargar grupos a la listaaa
+        listagrupoPerfil = new ArrayList<>();
+        recyclerGrupoPerfil = (RecyclerView) vista.findViewById(R.id.recycler_grupos_perfil);
+        recyclerGrupoPerfil.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        llenarLista(idusuario);
+
+        grupoAdapterPerfil = new GrupoPerfilAdapter(listagrupoPerfil, getContext());
+        recyclerGrupoPerfil.setAdapter(grupoAdapterPerfil);
+        grupoAdapterPerfil.traeridusuario(idusuario);
+
         return vista;
+    }
+
+    private void llenarLista(String idusuar) {
+
+        databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listagrupoPerfil.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    Grupo g = objSnapshot.getValue(Grupo.class);
+                    g.setId(Integer.parseInt(objSnapshot.getKey()));
+
+                    seencuentrausuario(String.valueOf(g.getId()), idusuar, g, g.getEstado()); //pregunto si pertenece
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void seencuentrausuario(String idgrupo, String iduser, Grupo grupo, String estado) {
+        databaseReference.child("Grupos").child(idgrupo).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                ArrayList<String> personas = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                    String pers = objSnapshot.getValue().toString();
+                    personas.add(pers);
+                }
+                //si no esta en el grupo que lo muestre
+                if (personas.contains(iduser)&&estado.equals("Activo")){
+                    grupoAdapterPerfil.agregarGrupo(grupo);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 }
 
