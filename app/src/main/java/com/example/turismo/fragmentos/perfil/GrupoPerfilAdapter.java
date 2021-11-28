@@ -69,6 +69,7 @@ public class GrupoPerfilAdapter extends RecyclerView.Adapter<GrupoPerfilAdapter.
                 i = new Intent(context, InfoGrupoActivity.class);
                 i.putExtra("idgrupo",holder.id.getText());
                 i.putExtra("idusuario", idusuario);
+                i.putExtra("origen", "perfil");
                 context.startActivity(i);
 
                 notifyDataSetChanged();

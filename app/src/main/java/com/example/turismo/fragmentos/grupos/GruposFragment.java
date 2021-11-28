@@ -132,6 +132,7 @@ public class GruposFragment extends Fragment {
                 Intent i;
                 i = new Intent(getContext(), CrearGrupoActivity.class);
                 i.putExtra("iduser",idusuario);
+                i.putExtra("origen", "grupos");
                 startActivity(i);
             }
         });

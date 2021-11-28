@@ -32,6 +32,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="center|top"
                     android:orientation="vertical">
@@ -45,6 +46,16 @@
 
                     </ImageView>
 
+                    <View
+                        android:layout_width="370dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#ccc" />
+
                     <TextView
                         android:id="@+id/tv_alias_usuario"
                         android:layout_width="match_parent"
@@ -52,6 +63,16 @@
                         android:gravity="center"
                         android:text="TextView"
                         android:textSize="23dp" />
+
+                    <View
+                        android:layout_width="370dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="35dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#ccc" />
 
 
                 </LinearLayout>
@@ -70,6 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:background="@color/md_orange_500"
                         android:padding="7dp">
 
                         <LinearLayout
@@ -119,7 +141,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Nombre"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton8"
@@ -141,7 +164,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Edad"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton11"
@@ -163,7 +187,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Genero"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton4"
@@ -185,7 +210,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Domicilio"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton5"
@@ -210,7 +236,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="7dp">
+                        android:padding="7dp"
+                        android:background="@color/md_amber_500">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -259,7 +286,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Email"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton9"
@@ -281,7 +309,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Telefono"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"
+                            android:textColor="@color/md_grey_500"/>
 
                         <ImageButton
                             android:id="@+id/imageButton10"
@@ -306,7 +335,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="7dp">
+                        android:padding="7dp"
+                        android:background="#ffb284">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -363,7 +393,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="7dp">
+                        android:padding="7dp"
+                        android:background="@drawable/gradiente">
 
                         <LinearLayout
                             android:layout_width="match_parent"

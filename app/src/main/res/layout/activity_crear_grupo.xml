@@ -32,6 +32,7 @@
                 android:background="#ccc" />
 
             <TextView
+                android:id="@+id/titulo_grupos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Crear Grupo"

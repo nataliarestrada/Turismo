@@ -32,7 +32,7 @@ import java.util.Map;
 public class InfoGrupoActivity extends AppCompatActivity {
 
     TextView id, sitio, region, origen, genero, descripcion, cantmax, cantmin, cantidad, estado;
-    String idgrupo, idusuario;
+    String idgrupo, idusuario, fragmento;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -43,7 +43,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
 
     long maxid = 0;
 
-    Button bt_unirse;
+    Button bt_unirse, bt_modificar, bt_cerrar, bt_salir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +63,24 @@ public class InfoGrupoActivity extends AppCompatActivity {
         estado = findViewById(R.id.textView_estado);
         //botones
         bt_unirse = (Button) findViewById(R.id.button_unirse_grupo);
+        bt_modificar = (Button) findViewById(R.id.button_modificar_grupo);
+        bt_cerrar = (Button) findViewById(R.id.button_cerrar_grupo);
+        bt_salir = (Button) findViewById(R.id.button_salir_grupo);
 
         //variable id grupo que me mandaron
         idgrupo = (String) getIntent().getExtras().getSerializable("idgrupo");
         idusuario = (String) getIntent().getExtras().getSerializable("idusuario");
+        fragmento = (String) getIntent().getExtras().getSerializable("origen");
+
+        //botones segun de que fragmento vengo
+        if (fragmento.equals("grupos")){
+            bt_modificar.setVisibility(View.INVISIBLE);
+            bt_cerrar.setVisibility(View.INVISIBLE);
+            bt_salir.setVisibility(View.INVISIBLE);
+        }
+        if (fragmento.equals("perfil")){
+            bt_unirse.setVisibility(View.INVISIBLE);
+        }
 
         //lo cargo en el elemento
         id.setText(idgrupo);
@@ -110,6 +124,18 @@ public class InfoGrupoActivity extends AppCompatActivity {
                 unirseGrupo(Integer.parseInt(String.valueOf(maxid)),idusuario,idgrupo);
                 // close this activity
                 finish();
+            }
+        });
+
+        bt_modificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(getApplicationContext(), CrearGrupoActivity.class);
+                i.putExtra("iduser",idusuario);
+                i.putExtra("origen", "perfil");
+                i.putExtra("idgrupo", idgrupo);
+                startActivity(i);
             }
         });
 

@@ -107,6 +107,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
                 i = new Intent(context, InfoGrupoActivity.class);
                 i.putExtra("idgrupo",holder.id.getText());
                 i.putExtra("idusuario", idusuario);
+                i.putExtra("origen", "grupos");
                 context.startActivity(i);
 
                 notifyDataSetChanged();
