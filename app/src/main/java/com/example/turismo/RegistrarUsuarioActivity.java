@@ -53,10 +53,10 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
 
         //Cargar SPINNER
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.generos, android.R.layout.simple_spinner_item );
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.generos_usuario, android.R.layout.simple_spinner_item );
         spinner_genero.setAdapter(arrayAdapter);
 
-        ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(this, R.array.origen, android.R.layout.simple_spinner_item );
+        ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(this, R.array.origen_usuarios, android.R.layout.simple_spinner_item );
         spinner_origen.setAdapter(arrayAdapter2);
 
 

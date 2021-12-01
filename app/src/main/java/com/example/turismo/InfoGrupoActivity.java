@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,7 +30,7 @@ import java.util.Map;
 
 public class InfoGrupoActivity extends AppCompatActivity {
 
-    TextView id, sitio, region, origen, genero, descripcion, cantmax, cantmin, cantidad, estado;
+    TextView id, sitio, region, mes_estimado, origen, genero, descripcion, cantmax, cantmin, cantidad, estado;
     String idgrupo, idusuario, fragmento;
 
     FirebaseDatabase firebaseDatabase;
@@ -54,6 +53,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
         id = findViewById(R.id.tv_id);
         sitio = findViewById(R.id.textView_sitio);
         region = findViewById(R.id.textView_region);
+        mes_estimado = findViewById(R.id.textView_mes);
         origen = findViewById(R.id.textView_origen);
         genero = findViewById(R.id.textView_genero);
         descripcion = findViewById(R.id.textView_descripcion);
@@ -67,24 +67,14 @@ public class InfoGrupoActivity extends AppCompatActivity {
         bt_cerrar = (Button) findViewById(R.id.button_cerrar_grupo);
         bt_salir = (Button) findViewById(R.id.button_salir_grupo);
 
-        //variable id grupo que me mandaron
+        //recupero variables que me mandaron
         idgrupo = (String) getIntent().getExtras().getSerializable("idgrupo");
-        idusuario = (String) getIntent().getExtras().getSerializable("idusuario");
         fragmento = (String) getIntent().getExtras().getSerializable("origen");
+        idusuario = (String) getIntent().getExtras().getSerializable("idusuario");
 
-        //botones segun de que fragmento vengo
-        if (fragmento.equals("grupos")){
-            bt_modificar.setVisibility(View.INVISIBLE);
-            bt_cerrar.setVisibility(View.INVISIBLE);
-            bt_salir.setVisibility(View.INVISIBLE);
-        }
-        if (fragmento.equals("perfil")){
-            bt_unirse.setVisibility(View.INVISIBLE);
-        }
 
         //lo cargo en el elemento
         id.setText(idgrupo);
-
 
         //inicializarFirebase();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -117,11 +107,24 @@ public class InfoGrupoActivity extends AppCompatActivity {
             }
         });
 
+        //botones segun de que fragmento vengo
+        if (fragmento.equals("grupos")){
+            bt_modificar.setVisibility(View.INVISIBLE);
+            bt_cerrar.setVisibility(View.INVISIBLE);
+            bt_salir.setVisibility(View.INVISIBLE);
+
+        }
+        if (fragmento.equals("perfil")){
+            bt_unirse.setVisibility(View.INVISIBLE);
+            administrador(idgrupo,idusuario);
+        }
+
         bt_unirse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //agregarintegrante
                 unirseGrupo(Integer.parseInt(String.valueOf(maxid)),idusuario,idgrupo);
+                System.out.println("Entre al boton unirse");
                 // close this activity
                 finish();
             }
@@ -139,6 +142,54 @@ public class InfoGrupoActivity extends AppCompatActivity {
             }
         });
 
+        bt_cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cerrargrupo(idgrupo);
+                finish();
+            }
+        });
+
+        bt_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salirdelgrupo(idgrupo,idusuario,Integer.parseInt(String.valueOf(maxid)));
+                System.out.println("Entre al boton salir");
+                finish();
+
+            }
+        });
+
+    }
+
+
+    private void administrador(String idg, String idusuar) {
+        databaseReference.child("Grupos").child(idg).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                    String id = objSnapshot.getKey();
+                    String usuario = objSnapshot.getValue().toString();
+
+                    if (usuario.equals(idusuar)){
+                        if (id.equals("1")){
+                            System.out.println("ES administrador del grupoo");
+                            bt_salir.setVisibility(View.INVISIBLE);
+
+                        }else{
+                            bt_modificar.setVisibility(View.INVISIBLE);
+                            bt_cerrar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
@@ -152,13 +203,14 @@ public class InfoGrupoActivity extends AppCompatActivity {
 
                 sitio.setText(g.getSitio());
                 region.setText(g.getRegion());
+                mes_estimado.setText(g.getMes_estimado());
                 origen.setText(g.getOrigen());
                 genero.setText(g.getGenero());
                 descripcion.setText(g.getDescripcion());
                 cantmax.setText("Cantidad Maxima: "+ String.valueOf(g.getCant_max()));
                 cantmin.setText("Cantidad Minima: "+ String.valueOf(g.getCant_min()));
                 cantidad.setText("Cantidad: "+ String.valueOf(g.getCantidad()));
-                estado.setText("Estrado: "+ g.getEstado());
+                estado.setText("Estado: "+ g.getEstado());
             }
 
             @Override
@@ -207,9 +259,59 @@ public class InfoGrupoActivity extends AppCompatActivity {
         databaseReference.child("Grupos").child(idgrupo).child("cantidad").setValue(idint);
         //agrego integrante
         databaseReference.child("Grupos").child(idgrupo).child("integrantes").child(String.valueOf(idint)).setValue(idusuario);
-
+        System.out.println("Entre al metodo unirse con "+fragmento);
         Toast.makeText(this,"Te has unido al grupo " + idgrupo, Toast.LENGTH_LONG).show();
 
     }
 
+    private void salirdelgrupo(String idgrupoo, String idusuario, int cant) {
+
+        databaseReference.child("Grupos").child(idgrupoo).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                    String id = objSnapshot.getKey();
+                    String usuario = objSnapshot.getValue().toString();
+
+                    if (usuario.equals(idusuario)){
+                        //elimino al usurio
+                        databaseReference.child("Grupos").child(idgrupoo).child("integrantes").child(id).removeValue();
+                        int cantida = cant-1;
+                        //actualizo cantidad de integrantes
+                        databaseReference.child("Grupos").child(idgrupo).child("cantidad").setValue(cantida);
+                        System.out.println("Entre al metodo salir con "+ fragmento);
+
+                        Toast.makeText(getApplicationContext(),"Has salido del grupo "+ idgrupoo, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void cerrargrupo(String idgrupo) {
+        //actualizo el estado del grupo
+        databaseReference.child("Grupos").child(idgrupo).child("estado").setValue("Cerrado");
+        Toast.makeText(getApplicationContext(),"Has Cerrado el grupo "+ idgrupo, Toast.LENGTH_LONG).show();
+
+    }
+
 }
+
+
+/*                            bt_salir.setClickable(false);
+
+                            bt_modificar.setVisibility(View.VISIBLE);
+                            bt_cerrar.setVisibility(View.VISIBLE);
+                            bt_modificar.setClickable(true);
+                            bt_cerrar.setClickable(true);*/
+/*                            bt_modificar.setClickable(false);
+                            bt_cerrar.setClickable(false);
+
+                            bt_salir.setVisibility(View.VISIBLE);
+                            bt_salir.setClickable(true);*/

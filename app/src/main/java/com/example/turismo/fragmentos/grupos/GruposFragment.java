@@ -26,36 +26,36 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class GruposFragment extends Fragment {
 
     String idusuario;
+    Spinner filter, filter1;
+    View vista;
+    ArrayList<Grupo> filtrarLista = null;
+    ArrayList<Grupo> listagrupo;
+    RecyclerView recyclerGrupo;
+    GrupoAdapter grupoAdapter;
+
+    ExtendedFloatingActionButton bflotante;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     public GruposFragment(String idusuario) {
         this.idusuario=idusuario;
         // Required empty public constructor
     }
 
-    Spinner filter, filter1;
-    View vista;
-
-    RecyclerView recyclerGrupo;
-    GrupoAdapter grupoAdapter;
-    ArrayList<Grupo> listagrupo;
-
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference();
-
-    ExtendedFloatingActionButton bflotante;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_grupos, container, false);
+
+        //inicializarFirebase();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
 
         //decraracion y vinculacion de spinner para los filtros
         filter = (Spinner)vista.findViewById(R.id.spinner_filter);
@@ -74,7 +74,12 @@ public class GruposFragment extends Fragment {
                 //Sirve para obtener el valor del spinner
                 String tipo = filter.getItemAtPosition(position).toString();
 
-                if(tipo.equals("Region")){
+                if (tipo.equals("Filtrar por")){
+                    grupoAdapter.filtrar(listagrupo);
+                    ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(getContext(), R.array.filter1, android.R.layout.simple_spinner_item );
+                    filter1.setAdapter(arrayAdapter2);
+
+                }   else if(tipo.equals("Region")){
                     ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(getContext(), R.array.regiones, android.R.layout.simple_spinner_item );
                     filter1.setAdapter(arrayAdapter2);
 
@@ -111,6 +116,238 @@ public class GruposFragment extends Fragment {
             }
         });
 
+        //FILTRADO - BUSQUEDA
+        filter1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String tipo = filter1.getItemAtPosition(position).toString();
+                filtrarLista = new ArrayList<>();
+                if (tipo.equals("Quebrada")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getRegion().equals("Quebrada")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Puna")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getRegion().equals("Puna")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Yungas")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getRegion().equals("Yungas")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Valles")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getRegion().equals("Valles")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Mixto")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getGenero().equals("Mixto")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Masculino")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getGenero().equals("Masculino")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Femenino")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getGenero().equals("Femenino")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Lgbtq")) {
+                    for (Grupo grupo : listagrupo){
+                        if(grupo.getGenero().equals("Lgbtq")){
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Otros")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getGenero().equals("Otros")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("San Salvador de Jujuy")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("San Salvador de Jujuy")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Palpala")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("Palpala")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Perico")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("Perico")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("El Carmen")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("El Carmen")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("San Pedro")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("San Pedro")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Ledesma")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getOrigen().equals("Ledesma")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Enero")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Enero")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Febrero")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Febrero")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Marzo")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Marzo")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Abril")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Abril")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Mayo")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Mayo")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Junio")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Junio")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Julio")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Julio")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Agosto")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Agosto")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Septiembre")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Septiembre")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Octubre")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Octubre")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Noviembre")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Noviembre")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+                if (tipo.equals("Diciembre")) {
+                    for (Grupo grupo : listagrupo) {
+                        if (grupo.getMes_estimado().equals("Diciembre")) {
+                            filtrarLista.add(grupo);
+                        }
+                    }
+                    grupoAdapter.filtrar(filtrarLista);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         //Cargar grupos a la listaaa
         listagrupo = new ArrayList<>();
         recyclerGrupo = (RecyclerView) vista.findViewById(R.id.recycler_grupos);
@@ -139,7 +376,6 @@ public class GruposFragment extends Fragment {
 
         return vista;
     }
-
 
     private void llenarLista(String idusuar) {
 
@@ -187,6 +423,99 @@ public class GruposFragment extends Fragment {
     }
 
 }
+
+
+
+
+
+
+/*
+        //Cargar grupos a la listaaa
+
+        listagrupo = new ArrayList<>();
+        recyclerGrupo = (RecyclerView) vista.findViewById(R.id.recycler_grupos);
+        recyclerGrupo.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //grupoAdapter = new GrupoAdapter(listagrupo, getContext());
+        llenarLista(idusuario);
+        grupoAdapter = new GrupoAdapter(listagrupo, getContext());
+        recyclerGrupo.setAdapter(grupoAdapter);
+        grupoAdapter.traeridusuario(idusuario);
+
+        //grupoAdapter.llevarfrag(getChildFragmentManager());*/
+
+/*    private void llenarLista(String idusuar) {
+
+        databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //grupoAdapter.limpiarlista();
+                listagrupo.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    Grupo g = objSnapshot.getValue(Grupo.class);
+                    g.setId(Integer.parseInt(objSnapshot.getKey()));
+
+                    //seencuentrausuario(idusuar, g); //pregunto si pertenece
+                    databaseReference.child("Grupos").child(String.valueOf(g.getId())).child("integrantes").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            ArrayList<String> personas = new ArrayList<>();
+                            for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                                String pers = objSnapshot.getValue().toString();
+                                personas.add(pers);
+                            }
+
+                            //si no esta en el grupo que lo muestre
+                            if (!personas.contains(idusuar)&&g.getEstado().equals("Activo")){
+                                listagrupo.add(g);
+                                grupoAdapter.cargarlista(listagrupo);
+                            }
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void seencuentrausuario(String iduser, Grupo grupo) {
+        *//*databaseReference.child("Grupos").child(String.valueOf(grupo.getId())).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                ArrayList<String> personas = new ArrayList<>();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+
+                    String pers = objSnapshot.getValue().toString();
+                    personas.add(pers);
+                }
+
+                //si no esta en el grupo que lo muestre
+                if (!personas.contains(iduser)&&grupo.getEstado().equals("Activo")){
+                    listagrupo.add(grupo);
+                }
+                grupoAdapter.cargarlista(listagrupo);
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });*//*
+    }*/
+
+
+
 
 /*/**
  * A simple {@link Fragment} subclass.

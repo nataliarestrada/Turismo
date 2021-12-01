@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="filter">
+        <item>Filtrar por</item>
         <item>Region</item>
         <item>Genero</item>
         <item>Destino</item>
@@ -10,7 +11,12 @@
         <item>Mes Estimado</item>
     </string-array>
 
+    <string-array name="filter1">
+        <item>Seleccionar</item>
+    </string-array>
+
     <string-array name="regiones">
+        <item>Seleccione Region</item>
         <item>Quebrada</item>
         <item>Puna</item>
         <item>Yungas</item>
@@ -18,6 +24,15 @@
     </string-array>
 
     <string-array name="generos">
+        <item>Seleccione Genero</item>
+        <item>Mixto</item>
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Lgbtq</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string-array name="generos_usuario">
         <item>Seleccione Genero</item>
         <item>Masculino</item>
         <item>Femenino</item>
@@ -31,6 +46,10 @@
         <item>Inca Cueva</item>
         <item>Garganta del diablo</item>
         <item>Cerro El Huancar de Abra Pampa</item>
+        <item>Termas de jordán, San Francisco</item>
+        <item>Parque Nacional Calilegua</item>
+        <item>Salinas Grandes</item>
+        <item>Dique la Ciénega</item>
     </string-array>
 
     <string-array name="departamento">
@@ -42,6 +61,16 @@
 
     <string-array name="origen">
         <item>Seleccione Origen</item>
+        <item>San Salvador de Jujuy</item>
+        <item>Palpala</item>
+        <item>Perico</item>
+        <item>El Carmen</item>
+        <item>San Pedro</item>
+        <item>Ledesma</item>
+    </string-array>
+
+    <string-array name="origen_usuarios">
+        <item>Seleccione Localidad</item>
         <item>San Salvador de Jujuy</item>
         <item>Palpala</item>
         <item>Perico</item>

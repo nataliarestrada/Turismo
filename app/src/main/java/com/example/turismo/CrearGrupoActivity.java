@@ -27,7 +27,7 @@ public class CrearGrupoActivity extends AppCompatActivity {
     Spinner sp_sitio, sp_genero, sp_mes, sp_origen, sp_cant_max, sp_cant_min, sp_region, sp_estado;
     TextView titulo;
     EditText et_descripcion, et_cant, et_id;
-    Button bt_crear, bt_cancelar;
+    Button bt_crear, bt_modificar;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -60,6 +60,7 @@ public class CrearGrupoActivity extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.titulo_grupos);
         //botones
         bt_crear = (Button) findViewById(R.id.button_crear_grupo);
+        bt_modificar = (Button) findViewById(R.id.button_modificar);
 
         //Cargar SPINNER
         cargarspinner();
@@ -70,6 +71,7 @@ public class CrearGrupoActivity extends AppCompatActivity {
 
         //botones segun de que fragmento vengo
         if (fragmento.equals("grupos")){
+            bt_modificar.setVisibility(View.INVISIBLE);
 
             //obtener ultimo id de grupos
             databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
@@ -85,14 +87,6 @@ public class CrearGrupoActivity extends AppCompatActivity {
 
                 }
             });
-
-            bt_crear.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    registrargrupo(Integer.parseInt(String.valueOf(maxid)),iduser);
-                    finish();
-                }
-            });
         }
         if (fragmento.equals("perfil")){
             //oculto el boton
@@ -101,10 +95,25 @@ public class CrearGrupoActivity extends AppCompatActivity {
             titulo.setText("Modificar Grupo");
             //cargo los campos con los datos del grupo
             llenarcampos(idgrupo);
-
-            //Boton modificar
-
         }
+
+        //boton crear
+        bt_crear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registrargrupo(Integer.parseInt(String.valueOf(maxid)),iduser);
+                finish();
+            }
+        });
+
+        //Boton modificar
+        bt_modificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modificargrupo(idgrupo);
+                finish();
+            }
+        });
     }
 
     private void llenarcampos(String id) {
@@ -213,7 +222,7 @@ public class CrearGrupoActivity extends AppCompatActivity {
 
         Map<String,Object> grupo= new HashMap<>();
         grupo.put("sitio",sitio);
-        grupo.put("region",region);
+        grupo.put("region","Puna");
         grupo.put("genero",genero);
         grupo.put("mes_estimado",mes_estimado);
         grupo.put("origen",origen);
@@ -228,4 +237,68 @@ public class CrearGrupoActivity extends AppCompatActivity {
         Toast.makeText(this,"Grupo registrado", Toast.LENGTH_LONG).show();
 
     }
+
+    private void modificargrupo(String idgrupo) {
+
+        databaseReference.child("Grupos").child(idgrupo).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getChildren();
+                Grupo g = snapshot.getValue(Grupo.class);
+                String sitio_ant=g.getSitio();
+                String genero_ant = g.getGenero();
+                String mes_estimado_ant=g.getMes_estimado();
+                String origen_ant=g.getOrigen();
+                int cant_min_ant=g.getCant_min();
+                int cant_max_ant=g.getCant_max();
+                String descripcion_ant=g.getDescripcion();
+
+                comparardatosymodificar(idgrupo,sitio_ant,genero_ant,mes_estimado_ant,origen_ant,cant_min_ant,cant_max_ant,descripcion_ant);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void comparardatosymodificar(String idg, String sitio_ant, String genero_ant, String mes_estimado_ant, String origen_ant, int cant_min_ant, int cant_max_ant, String descripcion_ant) {
+        String sitio = sp_sitio.getSelectedItem().toString();
+        String genero = sp_genero.getSelectedItem().toString();
+        String mes_estimado = sp_mes.getSelectedItem().toString();
+        String origen = sp_origen.getSelectedItem().toString();
+        int cant_min = Integer.parseInt(sp_cant_min.getSelectedItem().toString());
+        int cant_max = Integer.parseInt(sp_cant_max.getSelectedItem().toString());
+        String descripcion = et_descripcion.getText().toString();
+
+        //comparamos y en caso de modificacion actualizamos
+        if (!sitio.equals(sitio_ant)){
+            databaseReference.child("Grupos").child(idg).child("sitio").setValue(sitio);
+        }
+        if (!genero.equals(genero_ant)){
+            databaseReference.child("Grupos").child(idg).child("genero").setValue(genero);
+        }
+        if (!mes_estimado.equals(mes_estimado_ant)){
+            databaseReference.child("Grupos").child(idg).child("mes_estimado").setValue(mes_estimado);
+        }
+        if (!origen.equals(origen_ant)){
+            databaseReference.child("Grupos").child(idg).child("origen").setValue(origen);
+        }
+        if (cant_min!=cant_min_ant){
+            databaseReference.child("Grupos").child(idg).child("cant_min").setValue(cant_min);
+        }
+        if (cant_max!=cant_max_ant){
+            databaseReference.child("Grupos").child(idg).child("cant_max").setValue(cant_max);
+        }
+        if (!descripcion.equals("")){
+            //!descripcion.equals(descripcion_ant)
+            databaseReference.child("Grupos").child(idg).child("descripcion").setValue(descripcion);
+        }
+
+        Toast.makeText(this,"Grupo modificado", Toast.LENGTH_LONG).show();
+    }
+
+
 }

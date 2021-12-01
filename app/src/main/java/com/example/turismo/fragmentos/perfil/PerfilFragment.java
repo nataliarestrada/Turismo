@@ -1,10 +1,8 @@
 package com.example.turismo.fragmentos.perfil;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,17 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.turismo.Integrantes;
 import com.example.turismo.R;
 import com.example.turismo.Usuario;
 import com.example.turismo.fragmentos.grupos.Grupo;
-import com.example.turismo.fragmentos.grupos.GrupoAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +29,7 @@ import java.util.Objects;
 
 public class PerfilFragment extends Fragment {
 
-    private String idusuario;
+    String idusuario;
     View vista;
     ImageButton bt1, bt2, bt3;
     ImageView imagen;
@@ -84,7 +79,7 @@ public class PerfilFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshot.getChildren();
                 Usuario u = snapshot.getValue(Usuario.class);
-                System.out.println(u.getGenero());
+                //System.out.println(u.getGenero());
 
                 if (u.getGenero().equals("Masculino")){
 
@@ -160,7 +155,7 @@ public class PerfilFragment extends Fragment {
                     bt3.setBackground(getResources().getDrawable(R.drawable.ic_ocultar));
                     layout3.setVisibility(View.VISIBLE);
                     ViewGroup.LayoutParams params = layout3.getLayoutParams();
-                    params.height = 900;
+                    params.height = 800;
                     layout3.setLayoutParams(params);
                 }
             }
@@ -223,11 +218,82 @@ public class PerfilFragment extends Fragment {
             }
         });
     }
+
 }
 
 
 
 
+    /*private void llenarLista(String idusuar) {
+        databaseReference.child("Grupos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                grupoAdapterPerfil.limpiarlista();
+                //listagrupoPerfil.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()) {
+                    Grupo g = objSnapshot.getValue(Grupo.class);
+                    g.setId(Integer.parseInt(objSnapshot.getKey()));
+
+                    seencuentrausuario(idusuar, g); //pregunto si pertenece
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void seencuentrausuario(String iduser, Grupo grupo) {
+
+        databaseReference.child("Grupos").child(String.valueOf(grupo.getId())).child("integrantes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot1) {
+
+                ArrayList<String> personas = new ArrayList<>();
+
+                for (DataSnapshot objSnapshot1 : snapshot1.getChildren()){
+
+                    String pers = objSnapshot1.getValue().toString();
+                    personas.add(pers);
+                }
+                //si esta en el grupo que lo muestre
+                if (personas.contains(iduser)&&grupo.getEstado().equals("Activo")){
+                    //listagrupoPerfil.add(grupo);
+                    grupoAdapterPerfil.agregarGrupo(grupo);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
+*/
+
+
+
+
+
+//Query consulta = databaseReference.child("Grupo").child("integrantes").orderByValue().equalTo(idusuar);
+//System.out.println(consulta);
+        /*Query consulta = databaseReference.child("Grupo").child(String.valueOf(g.getId())).child("integrantes").orderByValue().equalTo(idusuar);
+                    consulta.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                            for (DataSnapshot obj : snapshot1.getChildren()){
+                                String valor = obj.getValue().toString();
+                                System.out.println(valor);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error1) {
+
+                        }
+                    });*/
+//System.out.println(consulta.get());
 
 
 /*/**

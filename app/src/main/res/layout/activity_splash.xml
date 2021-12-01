@@ -17,7 +17,7 @@
             android:id="@+id/imageView9"
             android:layout_width="212dp"
             android:layout_height="160dp"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/ic_logo" />
 
     </LinearLayout>
 

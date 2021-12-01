@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.turismo.InfoGrupoActivity;
@@ -39,6 +42,12 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.ViewHolder> 
     public void agregarGrupo(Grupo grupo){
         grupoList.add(grupo);
         this.notifyDataSetChanged();
+
+    }
+
+    public void filtrar(ArrayList<Grupo> filtrarCliente){
+        this.grupoList = filtrarCliente;
+        notifyDataSetChanged();
 
     }
 
